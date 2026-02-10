@@ -1,0 +1,4 @@
+// .gitignore file hai jisme un files aur directories ko list karte hain jinhe hum version control mein include nahi karna chahte. Ye file sensitive information ko accidentally commit hone se bachata hai.
+
+.env
+node_modules
