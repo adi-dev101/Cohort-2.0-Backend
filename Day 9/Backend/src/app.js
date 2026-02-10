@@ -1,7 +1,9 @@
 const express = require("express")
 const noteModel = require("./models/note.model")  // Import the note model to interact with the notes collection in the database
+const cors = require("cors") // Import the CORS middleware to enable Cross-Origin Resource Sharing, allowing the frontend application to make requests to the backend API from a different origin
 
 const app = express()
+app.use(cors())  // Use the CORS middleware to enable Cross-Origin Resource Sharing for all routes in the application
 app.use(express.json())  // Middleware to parse JSON bodies
 
 /**     
