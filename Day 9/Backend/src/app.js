@@ -1,11 +1,12 @@
 const express = require("express")
 const noteModel = require("./models/note.model")  // Import the note model to interact with the notes collection in the database
 const cors = require("cors") // Import the CORS middleware to enable Cross-Origin Resource Sharing, allowing the frontend application to make requests to the backend API from a different origin
+const path = require("path") // Import the path module to work with file and directory paths
 
 const app = express()
 app.use(cors())  // Use the CORS middleware to enable Cross-Origin Resource Sharing for all routes in the application
 app.use(express.json())  // Middleware to parse JSON bodies
-
+app.use(express.static(path.join(__dirname, "../public")))  // Middleware to serve static files from the public directory, allowing the frontend application to access the necessary assets such as HTML, CSS, and JavaScript files to render the user interface and interact with the backend API
 /**     
  * - POST /api/notes 
  * - Create a new note and save it to the mongoDb database.
@@ -73,4 +74,8 @@ app.patch("/api/notes/:id", async (req, res) => {
     })
 })
 
+app.use('*name', (req,res) => {  // Middleware to handle any requests that do not match the defined API routes, serves the index.html file from the public directory to allow the frontend application to handle client-side routing and display the appropriate content based on the URL path
+    res.sendFile(path.join(__dirname, "../public/index.html")) // Send the index.html file located in the public directory as the response to any requests that do not match the defined API routes, allowing the frontend application to handle client-side routing and display the appropriate content based on the URL path
+})
+//__dirname is a global variable in Node.js that represents the directory name of the current module, path.join is used to construct the absolute path to the index.html file by joining the __dirname with the relative path to the index.html file in the public directory
 module.exports = app
