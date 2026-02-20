@@ -7,7 +7,7 @@ function App() {
   const [notes, setNotes] = useState([])  // State variable to hold the list of notes retrieved from the backend API, initialized as an empty array
 
   function fetchNotes() { // Function to fetch notes from the backend API using axios, makes a GET request to the /api/notes endpoint and updates the notes state variable with the retrieved notes data from the respons
-    axios.get("http://localhost:3000/api/notes")
+    axios.get("https://day-2-h77l.onrender.com/api/notes")
     .then((res) => {
     setNotes(res.data.notes)
     })}
@@ -21,7 +21,7 @@ function App() {
     const title = e.target.title.value  // Extract the title value from the form input with name "title" and assign it to the title variable
     const description = e.target.description.value  // Extract the description value from the form input with name "description" and assign it to the description variable
 
-    axios.post("http://localhost:3000/api/notes", { 
+    axios.post("https://day-2-h77l.onrender.com/api/notes", { 
       title : title, 
       description : description
      })  // Make a POST request to the /api/notes endpoint with the title and description data to create a new note in the backend API
@@ -32,7 +32,7 @@ function App() {
   }
   
   function handleDeleteNote(noteId) { // Function to handle the deletion of a note, takes the id of the note to be deleted as a parameter, makes a DELETE request to the /api/notes/:id endpoint with the specified id to delete the note from the backend API, and calls the fetchNotes function to update the notes state variable and remove the deleted note from the frontend application
-    axios.delete(`http://localhost:3000/api/notes/${noteId}`)  // Make a DELETE request to the /api/notes/:id endpoint with the specified id to delete the note from the backend API
+    axios.delete(`https://day-2-h77l.onrender.com/api/notes/${noteId}`)  // Make a DELETE request to the /api/notes/:id endpoint with the specified id to delete the note from the backend API
     .then((res) => {
       console.log("Note deleted:", res.data)
       fetchNotes()  // Call the fetchNotes function to update the notes state variable and remove the deleted note from the frontend application
@@ -40,7 +40,7 @@ function App() {
   }
 
   function handleUpdateNote(noteId, newDescription) { // Function to handle the update of a note's description, takes the id of the note to be updated and the new description as parameters, makes a PATCH request to the /api/notes/:id endpoint with the specified id and new description to update the note in the backend API, and calls the fetchNotes function to update the notes state variable and reflect the updated description in the frontend application
-    axios.patch(`http://localhost:3000/api/notes/${noteId}`, { description: newDescription })  // Make a PATCH request to the /api/notes/:id endpoint with the specified id and new description to update the note in the backend API
+    axios.patch(`https://day-2-h77l.onrender.com/api/notes/${noteId}`, { description: newDescription })  // Make a PATCH request to the /api/notes/:id endpoint with the specified id and new description to update the note in the backend API
     .then((res) => {
       console.log("Note updated:", res.data)
       fetchNotes()  // Call the fetchNotes function to update the notes state variable and reflect the updated description in the frontend application
