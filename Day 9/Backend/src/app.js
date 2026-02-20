@@ -7,6 +7,7 @@ const app = express()
 app.use(cors())  // Use the CORS middleware to enable Cross-Origin Resource Sharing for all routes in the application
 app.use(express.json())  // Middleware to parse JSON bodies
 app.use(express.static(path.join(__dirname, "../public")))  // Middleware to serve static files from the public directory, allowing the frontend application to access the necessary assets such as HTML, CSS, and JavaScript files to render the user interface and interact with the backend API
+
 /**     
  * - POST /api/notes 
  * - Create a new note and save it to the mongoDb database.
@@ -16,7 +17,7 @@ app.use(express.static(path.join(__dirname, "../public")))  // Middleware to ser
 app.post("/api/notes", async (req, res) => {
     const { title, description } = req.body
 
-    const note =await noteModel.create({ title, description })  // Create a new note document in the database using the note model
+    const note = await noteModel.create({ title, description })  // Create a new note document in the database using the note model
 
     res.status(201).json({
         message: "Note created successfully",
@@ -78,4 +79,6 @@ app.use('*name', (req,res) => {  // Middleware to handle any requests that do no
     res.sendFile(path.join(__dirname, "../public/index.html")) // Send the index.html file located in the public directory as the response to any requests that do not match the defined API routes, allowing the frontend application to handle client-side routing and display the appropriate content based on the URL path
 })
 //__dirname is a global variable in Node.js that represents the directory name of the current module, path.join is used to construct the absolute path to the index.html file by joining the __dirname with the relative path to the index.html file in the public directory
+
+
 module.exports = app
